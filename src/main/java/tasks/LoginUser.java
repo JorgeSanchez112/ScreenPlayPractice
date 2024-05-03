@@ -3,7 +3,6 @@ package tasks;
 import interactions.ClickOn;
 import interactions.EnterText;
 import net.serenitybdd.screenplay.Actor;
-import net.serenitybdd.screenplay.AnonymousTask;
 import net.serenitybdd.screenplay.Task;
 import userInterfaces.HomePage;
 import userInterfaces.LogInPage;

@@ -5,45 +5,37 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actions.Open;
-import net.serenitybdd.screenplay.questions.Text;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import questions.WelcomeLinkMessage;
 import tasks.LoginUser;
-import userInterfaces.HomePage;
 
-import java.time.Duration;
-
+import static com.google.common.base.Predicates.equalTo;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
-import static org.hamcrest.core.StringContains.containsString;
 
 @RunWith(SerenityRunner.class)
 public class UserSuccessfullyLoggedTest {
-    private Users user = new Users("John");
+    private final Users user = new Users("John");
 
     @Before
-    public void initializeBrowser(){
+    public void initializeBrowser() {
         user.can(BrowseTheWeb.with(WebDriverManager.chromedriver().getWebDriver()));
-        user.attemptsTo(
-                Open.url("https://www.demoblaze.com/index.html")
-        );
+        user.attemptsTo(Open.url("https://www.demoblaze.com/index.html"));
     }
 
     @Test
     public void userHasBeenLoggingToHisAccount() {
         String username = "admin";
-        String expectedMessage = "Welcome " + username;
+        String expectedWelcomeMessage = "Welcome " + username;
 
-        user.attemptsTo(
-                LoginUser.withCredentials(username,"admin")
-        );
-        user.should(
-                seeThat(
-                        Text.of(HomePage.WELCOME_USERNAME_LINK.waitingForNoMoreThan(Duration.ofSeconds(10))),
-                        containsString(expectedMessage)
-                )
-        );
+        // Perform login action
+        user.attemptsTo(LoginUser.withCredentials(username, "admin"));
 
+        // Retrieve the actual welcome message from the UI
+        String actualWelcomeMessage = user.asksFor(WelcomeLinkMessage.displayed());
+
+        // Assert the welcome message matches the expected message
+        user.should(seeThat(WelcomeLinkMessage.displayed(), equalTo(expectedWelcomeMessage)));
     }
-
 }
