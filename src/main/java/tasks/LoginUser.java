@@ -8,8 +8,8 @@ import userInterfaces.HomePage;
 import userInterfaces.LogInPage;
 
 public class LoginUser implements Task {
-    private String username;
-    private String password;
+    private final String username;
+    private final String password;
 
     public LoginUser(String username, String password) {
         this.username = username;

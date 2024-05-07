@@ -1,7 +1,6 @@
 package interactions;
 
 import net.serenitybdd.screenplay.Actor;
-import net.serenitybdd.screenplay.AnonymousInteraction;
 import net.serenitybdd.screenplay.Interaction;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.targets.Target;

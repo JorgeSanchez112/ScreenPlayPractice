@@ -32,9 +32,6 @@ public class UserSuccessfullyLoggedTest {
         // Perform login action
         user.attemptsTo(LoginUser.withCredentials(username, "admin"));
 
-        // Retrieve the actual welcome message from the UI
-        String actualWelcomeMessage = user.asksFor(WelcomeLinkMessage.displayed());
-
         // Assert the welcome message matches the expected message
         user.should(seeThat(WelcomeLinkMessage.displayed(), equalTo(expectedWelcomeMessage)));
     }
