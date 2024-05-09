@@ -16,7 +16,6 @@ import userInterfaces.LogInPage;
 
 import static com.google.common.base.Predicates.equalTo;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(SerenityRunner.class)
 public class AreLabelsVisibleTest {
@@ -45,7 +44,7 @@ public class AreLabelsVisibleTest {
 
     @Test
     public void validatePasswordLabelIsVisible(){
-        String expectedPasswordLabel = "Password:";
+        String expectedPasswordLabel = "Password";
 
         user.attemptsTo(
                 ClickOn.the(HomePage.LOGIN_LINK)
