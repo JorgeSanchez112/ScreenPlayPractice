@@ -16,6 +16,7 @@ import userInterfaces.LogInPage;
 
 import static com.google.common.base.Predicates.equalTo;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(SerenityRunner.class)
 public class AreLabelsVisibleTest {
@@ -40,12 +41,6 @@ public class AreLabelsVisibleTest {
         String actualUsernameLabel = user.asksFor(TextsOfElements.displayed(LogInPage.USERNAME_LABEL));
 
         Assert.assertEquals(actualUsernameLabel,expectedUsernameLabel);
-
-
-        user.should(
-                seeThat(
-                        TextsOfElements.displayed(LogInPage.USERNAME_LABEL), equalTo(expectedUsernameLabel))
-                );
     }
 
     @Test
