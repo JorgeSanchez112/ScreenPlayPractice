@@ -2,6 +2,7 @@ package features.Login;
 
 import actors.Users;
 import interactions.ClickOn;
+import interactions.WaitForVisibility;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
@@ -16,7 +17,6 @@ import userInterfaces.LogInPage;
 
 import static com.google.common.base.Predicates.equalTo;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(SerenityRunner.class)
 public class AreLabelsVisibleTest {
@@ -34,7 +34,8 @@ public class AreLabelsVisibleTest {
         String expectedUsernameLabel = "Username:";
 
         user.attemptsTo(
-                ClickOn.the(HomePage.LOGIN_LINK)
+                ClickOn.the(HomePage.LOGIN_LINK),
+                WaitForVisibility.the(LogInPage.USERNAME_LABEL)
         );
 
         // Use the custom question to retrieve the welcome message
@@ -45,10 +46,11 @@ public class AreLabelsVisibleTest {
 
     @Test
     public void validatePasswordLabelIsVisible(){
-        String expectedPasswordLabel = "Password:";
+        String expectedPasswordLabel = "Password";
 
         user.attemptsTo(
-                ClickOn.the(HomePage.LOGIN_LINK)
+                ClickOn.the(HomePage.LOGIN_LINK),
+                WaitForVisibility.the(LogInPage.PASSWORD_LABEL)
         );
 
         // Assert the welcome message matches the expected message
