@@ -3,9 +3,12 @@ package tasks;
 import interactions.ClickOn;
 import interactions.EnterText;
 import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import userInterfaces.HomePage;
 import userInterfaces.LogInPage;
+
+import java.time.Duration;
 
 public class LoginUser implements Task {
     private final String username;
