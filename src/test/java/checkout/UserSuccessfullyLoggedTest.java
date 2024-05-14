@@ -5,8 +5,11 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Allure;
 import io.qameta.allure.model.Status;
 import net.serenitybdd.junit.runners.SerenityRunner;
+import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actions.Open;
+import net.serenitybdd.screenplay.actors.OnStage;
+import net.serenitybdd.screenplay.actors.OnlineCast;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,11 +27,12 @@ import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 
 @RunWith(SerenityRunner.class)
 public class UserSuccessfullyLoggedTest {
-    private final Users user = new Users("John");
     Properties properties = new Properties();
 
     @Before
     public void initializeBrowser() {
+        OnStage.setTheStage(new OnlineCast());
+        Actor user = OnStage.theActorCalled("Toby");
         user.can(BrowseTheWeb.with(WebDriverManager.chromedriver().getWebDriver()));
         user.attemptsTo(Open.url("https://www.demoblaze.com/index.html"));
     }
@@ -55,6 +59,9 @@ public class UserSuccessfullyLoggedTest {
 
     @Test
     public void userHasBeenLoggingToHisAccount() {
+        OnStage.setTheStage(new OnlineCast());
+        Actor user = OnStage.theActorCalled("Toby");
+
         String username = "admin";
         String expectedWelcomeMessage = "Welcome " + username;
 
