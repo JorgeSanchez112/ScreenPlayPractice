@@ -27,8 +27,8 @@ public class UserSuccessfullyLoggedTest {
         user.can(BrowseTheWeb.with(WebDriverManager.chromedriver().getWebDriver()));
         user.attemptsTo(Open.url("https://www.demoblaze.com/index.html"));
 
-        throw new io.cucumber.java.PendingException();
     }
+
     @When("{string} logs in with valid credentials")
     public void logsInWithValidCredentials(String actorName) {
         OnStage.setTheStage(new OnlineCast());
@@ -40,9 +40,8 @@ public class UserSuccessfullyLoggedTest {
         user.attemptsTo(
                 LoginUser.withCredentials(username, "admin")
         );
-
-        throw new io.cucumber.java.PendingException();
     }
+
     @Then("{string} should be presented on the home page with his name {string} in a message")
     public void shouldBePresentedOnTheHomePageWithHisNameInAMessage(String actorName, String username) {
         OnStage.setTheStage(new OnlineCast());
@@ -52,7 +51,5 @@ public class UserSuccessfullyLoggedTest {
 
         // Assert the welcome message matches the expected message
         user.should(seeThat(WelcomeLinkMessage.displayed(), equalTo(expectedWelcomeMessage)));
-
-        throw new io.cucumber.java.PendingException();
     }
 }
