@@ -1,4 +1,4 @@
-package features.Login;
+package checkout;
 
 import actors.Users;
 import interactions.ClickOn;
