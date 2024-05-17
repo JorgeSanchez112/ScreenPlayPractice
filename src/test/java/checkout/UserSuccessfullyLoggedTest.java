@@ -1,5 +1,7 @@
 package checkout;
 
+import interactions.WaitForVisibility;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -11,6 +13,7 @@ import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.actors.OnlineCast;
 import questions.WelcomeLinkMessage;
 import tasks.LoginUser;
+import userInterfaces.HomePage;
 
 
 import static com.google.common.base.Predicates.equalTo;
@@ -18,10 +21,13 @@ import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 
 
 public class UserSuccessfullyLoggedTest {
+    @Before
+    public void set_the_stage(){
+        OnStage.setTheStage(new OnlineCast());
+    }
 
     @Given("{string} is on the login page")
     public void isOnTheLoginPage(String actorName) {
-        OnStage.setTheStage(new OnlineCast());
         Actor user = OnStage.theActorCalled(actorName);
 
         user.can(BrowseTheWeb.with(WebDriverManager.chromedriver().getWebDriver()));
@@ -31,20 +37,19 @@ public class UserSuccessfullyLoggedTest {
 
     @When("{string} logs in with valid credentials")
     public void logsInWithValidCredentials(String actorName) {
-        OnStage.setTheStage(new OnlineCast());
         Actor user = OnStage.theActorCalled(actorName);
 
         String username = "admin";
 
         // Perform login action
         user.attemptsTo(
-                LoginUser.withCredentials(username, "admin")
+                LoginUser.withCredentials(username, "admin"),
+                WaitForVisibility.the(HomePage.WELCOME_USERNAME_LINK)
         );
     }
 
     @Then("{string} should be presented on the home page with his name {string} in a message")
     public void shouldBePresentedOnTheHomePageWithHisNameInAMessage(String actorName, String username) {
-        OnStage.setTheStage(new OnlineCast());
         Actor user = OnStage.theActorCalled(actorName);
 
         String expectedWelcomeMessage = "Welcome " + username;
